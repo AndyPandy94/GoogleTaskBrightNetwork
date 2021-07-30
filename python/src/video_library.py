@@ -1,9 +1,10 @@
 """A video library class."""
+from typing import Sequence, Optional
 
 from .video import Video
 from pathlib import Path
 import csv
-
+import random
 
 # Helper Wrapper around CSV reader to strip whitespace from around
 # each item.
@@ -30,7 +31,9 @@ class VideoLibrary:
 
     def get_all_videos(self):
         """Returns all available video information from the video library."""
-        return list(self._videos.values())
+        return list(sorted(self._videos.values(), key=str))
+
+
 
     def get_video(self, video_id):
         """Returns the video object (title, url, tags) from the video library.
@@ -43,3 +46,11 @@ class VideoLibrary:
             does not exist.
         """
         return self._videos.get(video_id, None)
+
+    def get_random_video_id(self):
+        try:
+            return random.choice([video.video_id])
+        except IndexError:
+            return None
+
+

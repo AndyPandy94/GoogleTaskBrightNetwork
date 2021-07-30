@@ -1,12 +1,14 @@
 """A video player class."""
 
 from .video_library import VideoLibrary
+from .video_playback import VideoPlayback
 
 
 class VideoPlayer:
     """A class used to represent a Video Player."""
 
     def __init__(self):
+        self._videos = videos = VideoLibrary()
         self._video_library = VideoLibrary()
 
     def number_of_videos(self):
@@ -16,7 +18,9 @@ class VideoPlayer:
     def show_all_videos(self):
         """Returns all videos."""
 
-        print("show_all_videos needs implementation")
+        print("Here's a list of all available videos:")
+        for v in self._video_library.get_all_videos():
+            print(f'{v.title} ({v.video_id}) {v.tags}')
 
     def play_video(self, video_id):
         """Plays the respective video.
@@ -24,17 +28,30 @@ class VideoPlayer:
         Args:
             video_id: The video_id to be played.
         """
-        print("play_video needs implementation")
+
+        # video = get_video(1)
+        # print("Playing {video}")
+
+
+
+
 
     def stop_video(self):
         """Stops the current video."""
 
-        print("stop_video needs implementation")
+        # print("stop_video needs implementation")
+        video = self._playback.get_video()
+        print(f"Stopping video: {video.title}")
+        self._playback.stop()
 
     def play_random_video(self):
         """Plays a random video from the video library."""
 
-        print("play_random_video needs implementation")
+        # print("play_random_video needs implementation")
+
+        random_video_id = self._videos.get_random_video_id()
+
+
 
     def pause_video(self):
         """Pauses the current video."""
@@ -44,7 +61,10 @@ class VideoPlayer:
     def continue_video(self):
         """Resumes playing the current video."""
 
-        print("continue_video needs implementation")
+        # print("continue_video needs implementation")
+        video = self._playback.get_video()
+        self._playback.resume()
+        print(f"Continuing video: {video.title}")
 
     def show_playing(self):
         """Displays video currently playing."""
